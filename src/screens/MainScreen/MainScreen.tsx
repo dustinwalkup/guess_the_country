@@ -35,10 +35,12 @@ export const MainScreen: FC<MainScreenProps> = () => {
     }
   }, [resetGame, countryList]);
 
+  // This useEffect will call the API to get the list of countries
   useEffect(() => {
     getAllCountries();
   }, [getAllCountries]);
 
+  // This useEffect updates the countryList state once the data is returned from API
   useEffect(() => {
     if (getAllCountriesData) {
       setCountryList(getAllCountriesData.countries);
@@ -66,7 +68,6 @@ export const MainScreen: FC<MainScreenProps> = () => {
       </>
     );
   }
-  console.log("countryAnswer", countryAnswer);
   return (
     <>
       <CustomModal

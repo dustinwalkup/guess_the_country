@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import { AttemptsProps } from "./Attempts.type";
 
+// constants
 const NUM_ATTEMPTS_CONST: string = "Number of attempts remaining:";
 
 export const Attempts: FC<AttemptsProps> = ({ numAttempts }) => {

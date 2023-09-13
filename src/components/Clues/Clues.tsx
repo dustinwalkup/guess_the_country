@@ -11,6 +11,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { CluesProps } from "./Clues.type";
 
+// constants
 const CAPITAL: string = "Capital";
 const CONTINENT: string = "Continent";
 const LANGUAGE: string = "Langauge(s)";
@@ -31,6 +32,7 @@ export const Clues: FC<CluesProps> = ({
     }
   }, [resetGame]);
 
+  // When user selects Visibility Icon, the state is updated to show particular field and the attempt state is updated
   const showClueHandler = (setStateFunc: Dispatch<SetStateAction<boolean>>) => {
     setStateFunc(true);
     setNumAttempts((prev: number) => prev - 1);

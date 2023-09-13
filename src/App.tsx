@@ -6,8 +6,8 @@ import {
   NormalizedCacheObject,
 } from "@apollo/client";
 import { Header } from "./components/Header/Header";
-import "./App.css";
 import { MainScreen } from "./screens/MainScreen/MainScreen";
+import "./App.css";
 
 const GAME_TITLE: string = "Guess The Country";
 const URI: string = "https://countries.trevorblades.com/graphql";

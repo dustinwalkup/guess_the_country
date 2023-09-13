@@ -14,6 +14,7 @@ export const CountryForm: FC<CountryFormProps> = ({
 }) => {
   const methods = useForm();
 
+  // Updates user attempts and checks if user submitted the correct answer
   const onSubmitHandler = (data: CountryDataType) => {
     setNumAttempts((prev) => prev - 1);
     if (data?.country?.code === countryAnswer?.code) setWinner(true);
