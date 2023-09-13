@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import {
   Box,
   Divider,
@@ -18,9 +18,14 @@ const LANGUAGE: string = "Langauge(s)";
 const HIDE_TEXT: string = "------------------------";
 const CLUES: string = "Clues";
 
-export const Clues: FC<CluesProps> = ({ countryAnswer }) => {
+export const Clues: FC<CluesProps> = ({ countryAnswer, setNumAttempts }) => {
   const [showContinent, setShowContinent] = useState<boolean>(false);
   const [showLangauges, setShowLangauges] = useState<boolean>(false);
+
+  const showClueHandler = (setStateFunc: Dispatch<SetStateAction<boolean>>) => {
+    setStateFunc(true);
+    setNumAttempts((prev: number) => prev - 1);
+  };
 
   return (
     <Box
@@ -56,7 +61,7 @@ export const Clues: FC<CluesProps> = ({ countryAnswer }) => {
               <IconButton
                 edge="end"
                 aria-label="visibility"
-                onClick={() => setShowContinent(true)}
+                onClick={() => showClueHandler(setShowContinent)}
               >
                 <VisibilityIcon />
               </IconButton>
@@ -78,7 +83,7 @@ export const Clues: FC<CluesProps> = ({ countryAnswer }) => {
               <IconButton
                 edge="end"
                 aria-label="visibility"
-                onClick={() => setShowLangauges(true)}
+                onClick={() => showClueHandler(setShowLangauges)}
               >
                 <VisibilityIcon />
               </IconButton>

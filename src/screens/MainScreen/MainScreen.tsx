@@ -6,10 +6,13 @@ import { CountryType, MainScreenProps } from "./MainScreen.type";
 import { GET_ALL_COUNTRIES } from "./MainScreen.graphql";
 import { getRandomCountry } from "./MainScreen.utils";
 import { Clues } from "../../components/Clues/Clues";
+import { Attempts } from "../../components/Attempts/Attempts";
 
 export const MainScreen: FC<MainScreenProps> = () => {
-  const [countryList, setCountryList] = useState([]);
+  const [countryList, setCountryList] = useState<CountryType[]>([]);
   const [countryAnswer, setCountryAnswer] = useState<CountryType | null>(null);
+  const [numAttempts, setNumAttempts] = useState<number>(3);
+  // const [winner, setWinner] = useState(false);
 
   const [
     getAllCountries,
@@ -54,8 +57,14 @@ export const MainScreen: FC<MainScreenProps> = () => {
   console.log("countryAnswer", countryAnswer);
   return (
     <>
-      <Clues countryAnswer={countryAnswer} />
-      <CountryForm countryList={countryList} />
+      <Clues countryAnswer={countryAnswer} setNumAttempts={setNumAttempts} />
+      <CountryForm
+        countryList={countryList}
+        countryAnswer={countryAnswer}
+        setNumAttempts={setNumAttempts}
+        // setWinner={setWinner}
+      />
+      <Attempts numAttempts={numAttempts} />
     </>
   );
 };
