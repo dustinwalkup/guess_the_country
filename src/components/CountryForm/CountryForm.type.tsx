@@ -5,5 +5,10 @@ export interface CountryFormProps {
   countryList: CountryType[];
   countryAnswer: CountryType | null;
   setNumAttempts: Dispatch<SetStateAction<number>>;
-  // setWinner: Dispatch<SetStateAction<boolean>>;
+  setWinner: Dispatch<SetStateAction<boolean>>;
+  resetGame: boolean;
+}
+
+export interface CountryDataType {
+  country?: CountryType;
 }

@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import {
   Box,
   Divider,
@@ -6,7 +6,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListSubheader,
   Typography,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -16,11 +15,21 @@ const CAPITAL: string = "Capital";
 const CONTINENT: string = "Continent";
 const LANGUAGE: string = "Langauge(s)";
 const HIDE_TEXT: string = "------------------------";
-const CLUES: string = "Clues";
 
-export const Clues: FC<CluesProps> = ({ countryAnswer, setNumAttempts }) => {
+export const Clues: FC<CluesProps> = ({
+  countryAnswer,
+  setNumAttempts,
+  resetGame,
+}) => {
   const [showContinent, setShowContinent] = useState<boolean>(false);
   const [showLangauges, setShowLangauges] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (resetGame) {
+      setShowContinent(false);
+      setShowLangauges(false);
+    }
+  }, [resetGame]);
 
   const showClueHandler = (setStateFunc: Dispatch<SetStateAction<boolean>>) => {
     setStateFunc(true);
@@ -31,19 +40,10 @@ export const Clues: FC<CluesProps> = ({ countryAnswer, setNumAttempts }) => {
     <Box
       display="flex"
       justifyContent="center"
-      sx={{ marginBottom: 5, marginTop: 5 }}
+      sx={{ marginBottom: 5, marginTop: 10 }}
     >
       <List
         aria-labelledby="clues-list"
-        subheader={
-          <ListSubheader
-            component="h4"
-            id="clues-list-subheader"
-            sx={{ fontSize: 25 }}
-          >
-            {CLUES}
-          </ListSubheader>
-        }
         sx={{
           width: "100%",
           maxWidth: 360,

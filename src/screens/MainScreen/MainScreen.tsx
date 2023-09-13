@@ -2,17 +2,19 @@ import { FC, useEffect, useState } from "react";
 import { Alert, AlertTitle, CircularProgress } from "@mui/material";
 import { useLazyQuery } from "@apollo/client";
 import { CountryForm } from "../../components/CountryForm/CountryForm";
+import { Clues } from "../../components/Clues/Clues";
+import { Attempts } from "../../components/Attempts/Attempts";
+import { CustomModal } from "../../components/CustomModal/CustomModal";
 import { CountryType, MainScreenProps } from "./MainScreen.type";
 import { GET_ALL_COUNTRIES } from "./MainScreen.graphql";
 import { getRandomCountry } from "./MainScreen.utils";
-import { Clues } from "../../components/Clues/Clues";
-import { Attempts } from "../../components/Attempts/Attempts";
 
 export const MainScreen: FC<MainScreenProps> = () => {
   const [countryList, setCountryList] = useState<CountryType[]>([]);
   const [countryAnswer, setCountryAnswer] = useState<CountryType | null>(null);
   const [numAttempts, setNumAttempts] = useState<number>(3);
-  // const [winner, setWinner] = useState(false);
+  const [winner, setWinner] = useState(false);
+  const [resetGame, setResetGame] = useState(false);
 
   const [
     getAllCountries,
@@ -22,6 +24,16 @@ export const MainScreen: FC<MainScreenProps> = () => {
       data: getAllCountriesData,
     },
   ] = useLazyQuery(GET_ALL_COUNTRIES);
+
+  // This useEffect will reset the game
+  useEffect(() => {
+    if (resetGame) {
+      setResetGame(false);
+      setWinner(false);
+      setNumAttempts(3);
+      setCountryAnswer(getRandomCountry(countryList));
+    }
+  }, [resetGame, countryList]);
 
   useEffect(() => {
     getAllCountries();
@@ -57,12 +69,23 @@ export const MainScreen: FC<MainScreenProps> = () => {
   console.log("countryAnswer", countryAnswer);
   return (
     <>
-      <Clues countryAnswer={countryAnswer} setNumAttempts={setNumAttempts} />
+      <CustomModal
+        winner={winner}
+        numAttempts={numAttempts}
+        setResetGame={setResetGame}
+        countryAnswer={countryAnswer}
+      />
+      <Clues
+        countryAnswer={countryAnswer}
+        setNumAttempts={setNumAttempts}
+        resetGame={resetGame}
+      />
       <CountryForm
         countryList={countryList}
         countryAnswer={countryAnswer}
         setNumAttempts={setNumAttempts}
-        // setWinner={setWinner}
+        setWinner={setWinner}
+        resetGame={resetGame}
       />
       <Attempts numAttempts={numAttempts} />
     </>

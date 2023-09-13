@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { CountryType } from "../../screens/MainScreen/MainScreen.type";
@@ -12,9 +12,19 @@ import {
 
 const INPUT_NAME: string = "country";
 
-export const CustomSelect: FC<CustomSelectProps> = ({ countryList }) => {
+export const CustomSelect: FC<CustomSelectProps> = ({
+  countryList,
+  resetGame,
+}) => {
   const [countryValue, setCountryValue] = useState<CountryType | null>(null);
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
+
+  useEffect(() => {
+    if (resetGame) {
+      setCountryValue(null);
+      setValue(INPUT_NAME, "");
+    }
+  }, [resetGame, setValue]);
 
   const autoCompleteOnChangeHandler = (
     data: CountryType | null,
