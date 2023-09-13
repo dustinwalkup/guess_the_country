@@ -5,6 +5,7 @@ import { CountryForm } from "../../components/CountryForm/CountryForm";
 import { CountryType, MainScreenProps } from "./MainScreen.type";
 import { GET_ALL_COUNTRIES } from "./MainScreen.graphql";
 import { getRandomCountry } from "./MainScreen.utils";
+import { Clues } from "../../components/Clues/Clues";
 
 export const MainScreen: FC<MainScreenProps> = () => {
   const [countryList, setCountryList] = useState([]);
@@ -53,6 +54,7 @@ export const MainScreen: FC<MainScreenProps> = () => {
   console.log("countryAnswer", countryAnswer);
   return (
     <>
+      <Clues countryAnswer={countryAnswer} />
       <CountryForm countryList={countryList} />
     </>
   );
