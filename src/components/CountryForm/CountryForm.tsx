@@ -10,7 +10,7 @@ import { CustomSelect } from "../CustomSelect/CustomSelect";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { Box, Stack } from "@mui/material";
 
-export const CountryForm: FC<CountryFormProps> = () => {
+export const CountryForm: FC<CountryFormProps> = ({ countryList }) => {
   const methods = useForm();
 
   const onSubmitHandler = (data: SubmitHandler<FieldValues> | FieldValues) =>
@@ -21,7 +21,7 @@ export const CountryForm: FC<CountryFormProps> = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmitHandler)}>
           <Stack spacing={2}>
-            <CustomSelect />
+            <CustomSelect countryList={countryList} />
             <CustomButton buttonText="Submit" />
           </Stack>
         </form>

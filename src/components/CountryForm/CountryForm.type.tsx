@@ -1,1 +1,3 @@
-export interface CountryFormProps {}
+export interface CountryFormProps {
+  countryList: never[];
+}

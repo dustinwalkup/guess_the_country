@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { CountryOptionType, CustomSelectProps } from "./CustomSelect.type";
-import { sampledata } from "../../assets/data";
 import {
   Controller,
   ControllerRenderProps,
@@ -12,7 +11,7 @@ import {
 
 const INPUT_NAME: string = "country";
 
-export const CustomSelect: FC<CustomSelectProps> = () => {
+export const CustomSelect: FC<CustomSelectProps> = ({ countryList }) => {
   const [countryValue, setCountryValue] = useState<CountryOptionType | null>(
     null
   );
@@ -35,11 +34,14 @@ export const CustomSelect: FC<CustomSelectProps> = () => {
         <Autocomplete
           {...field}
           disablePortal
+          getOptionLabel={(option) => option.name}
           isOptionEqualToValue={(option, value) => option.code === value.code}
           id="user-input"
           onChange={(_, data) => autoCompleteOnChangeHandler(data, field)}
-          options={sampledata}
-          renderInput={(params) => <TextField {...params} label="Country" />}
+          options={countryList.countries}
+          renderInput={(params) => (
+            <TextField {...params} label="Enter Country" />
+          )}
           sx={{ width: 300 }}
           value={countryValue}
         />
