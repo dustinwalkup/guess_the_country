@@ -1,12 +1,14 @@
 import { FC, useEffect, useState } from "react";
+import { Alert, AlertTitle, CircularProgress } from "@mui/material";
 import { useLazyQuery } from "@apollo/client";
 import { CountryForm } from "../../components/CountryForm/CountryForm";
-import { MainScreenProps } from "./MainScreen.type";
-import { ALL_COUNTRIES } from "./MainScreen.graphql";
-import { Alert, AlertTitle, CircularProgress } from "@mui/material";
+import { CountryType, MainScreenProps } from "./MainScreen.type";
+import { GET_ALL_COUNTRIES } from "./MainScreen.graphql";
+import { getRandomCountry } from "./MainScreen.utils";
 
 export const MainScreen: FC<MainScreenProps> = () => {
   const [countryList, setCountryList] = useState([]);
+  const [countryAnswer, setCountryAnswer] = useState<CountryType | null>(null);
 
   const [
     getAllCountries,
@@ -15,7 +17,7 @@ export const MainScreen: FC<MainScreenProps> = () => {
       error: getAllCountriesError,
       data: getAllCountriesData,
     },
-  ] = useLazyQuery(ALL_COUNTRIES);
+  ] = useLazyQuery(GET_ALL_COUNTRIES);
 
   useEffect(() => {
     getAllCountries();
@@ -23,7 +25,8 @@ export const MainScreen: FC<MainScreenProps> = () => {
 
   useEffect(() => {
     if (getAllCountriesData) {
-      setCountryList(getAllCountriesData);
+      setCountryList(getAllCountriesData.countries);
+      setCountryAnswer(getRandomCountry(getAllCountriesData.countries));
     }
   }, [getAllCountriesData]);
 
@@ -47,7 +50,7 @@ export const MainScreen: FC<MainScreenProps> = () => {
       </>
     );
   }
-
+  console.log("countryAnswer", countryAnswer);
   return (
     <>
       <CountryForm countryList={countryList} />

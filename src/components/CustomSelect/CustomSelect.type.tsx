@@ -1,8 +1,5 @@
-export interface CustomSelectProps {
-  countryList: never[];
-}
+import { CountryType } from "../../screens/MainScreen/MainScreen.type";
 
-export type CountryOptionType = {
-  code: string;
-  label: string;
-};
+export interface CustomSelectProps {
+  countryList: CountryType[];
+}

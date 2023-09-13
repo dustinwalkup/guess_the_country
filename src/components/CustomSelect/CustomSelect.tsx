@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { CountryOptionType, CustomSelectProps } from "./CustomSelect.type";
+import { CountryType } from "../../screens/MainScreen/MainScreen.type";
+import { CustomSelectProps } from "./CustomSelect.type";
 import {
   Controller,
   ControllerRenderProps,
@@ -12,13 +13,11 @@ import {
 const INPUT_NAME: string = "country";
 
 export const CustomSelect: FC<CustomSelectProps> = ({ countryList }) => {
-  const [countryValue, setCountryValue] = useState<CountryOptionType | null>(
-    null
-  );
+  const [countryValue, setCountryValue] = useState<CountryType | null>(null);
   const { control } = useFormContext();
 
   const autoCompleteOnChangeHandler = (
-    data: CountryOptionType | null,
+    data: CountryType | null,
     field: ControllerRenderProps<FieldValues, string>
   ) => {
     setCountryValue(data);
@@ -38,7 +37,7 @@ export const CustomSelect: FC<CustomSelectProps> = ({ countryList }) => {
           isOptionEqualToValue={(option, value) => option.code === value.code}
           id="user-input"
           onChange={(_, data) => autoCompleteOnChangeHandler(data, field)}
-          options={countryList.countries}
+          options={countryList}
           renderInput={(params) => (
             <TextField {...params} label="Enter Country" />
           )}
