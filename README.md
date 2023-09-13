@@ -1,27 +1,46 @@
-# React + TypeScript + Vite
+# Guess the Country Game w/React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple front-end project, or trivia game, where the purpose of the game is for the user to guess a certain country in question.
 
-Currently, two official plugins are available:
+# Demo Link:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+TBD
 
-## Expanding the ESLint configuration
+# Game Rules:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- User is given 3 attempts to guess the country
+- The first hint (capital) is given to the user
+- The user has the option to reveal 2 additional hints, each at a cost of an attempt
 
-- Configure the top-level `parserOptions` property like this:
+![Alt text](UIPic.png)
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+# This project was developed using:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Vite (Front-end tooling and project scaffold)
+- React + TypeScript
+- HTML, CSS, JS
+- GraphQL + Apollo/Client
+- Material UI 5 (styling)
+- React Hook Form (form management)
+
+# Setup
+
+- download or clone the repo
+- run `npm install` in the root
+- run `npm run dev` to run on local
+- go to http://localhost:5173/ in the browser
+
+# Status
+
+Guess the country is still in progress. This first version was developed quickly and the plan (so far) is to implement the following updates:
+
+- Many additional UI featurs (dark mode, menu, etc...)
+- Additional game features (keeping score etc...)
+- Storybook (for UI development)
+- Jest ( unit testing)
+- Implement global state management using useContext and remove existing prop drilling
+- Deploy to AWS for live demo
+
+# License
+
+Project is published under the MIT license.
