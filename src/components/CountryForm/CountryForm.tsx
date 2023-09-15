@@ -25,7 +25,7 @@ export const CountryForm: FC<CountryFormProps> = ({
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmitHandler)}>
           <Stack spacing={2}>
-            <CustomSelect countryList={countryList} resetGame={resetGame} />
+            <CustomSelect options={countryList} resetGame={resetGame} />
             <CustomButton buttonText="Submit" />
           </Stack>
         </form>

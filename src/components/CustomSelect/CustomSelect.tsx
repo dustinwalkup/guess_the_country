@@ -13,10 +13,7 @@ import { CustomSelectProps } from "./CustomSelect.type";
 const INPUT_NAME: string = "country";
 const ERR_MESSAGE: string = "This is required";
 
-export const CustomSelect: FC<CustomSelectProps> = ({
-  countryList,
-  resetGame,
-}) => {
+export const CustomSelect: FC<CustomSelectProps> = ({ options, resetGame }) => {
   const [countryValue, setCountryValue] = useState<CountryType | null>(null);
   const {
     control,
@@ -57,7 +54,7 @@ export const CustomSelect: FC<CustomSelectProps> = ({
             isOptionEqualToValue={(option, value) => option.code === value.code}
             id="user-input"
             onChange={(_, data) => autoCompleteOnChangeHandler(data, field)}
-            options={countryList}
+            options={options}
             renderInput={(params) => (
               <TextField {...params} label="Enter Country" />
             )}

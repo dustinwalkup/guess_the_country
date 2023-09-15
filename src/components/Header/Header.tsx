@@ -3,9 +3,17 @@ import { AppBar, Toolbar, Typography } from "@mui/material/";
 // import MenuIcon from "@mui/icons-material/Menu";
 import { HeaderProps } from "./Header.type";
 
-export const Header: FC<HeaderProps> = ({ title }) => {
+export const Header: FC<HeaderProps> = ({
+  title,
+  color = "primary",
+  position = "static",
+}) => {
   return (
-    <AppBar position="static" style={{ margin: 0, marginBottom: 20 }}>
+    <AppBar
+      position={position}
+      color={color}
+      style={{ margin: 0, marginBottom: 20, alignItems: "center" }}
+    >
       <Toolbar>
         {/*
         
